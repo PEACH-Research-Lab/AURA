@@ -311,3 +311,32 @@ section:target {
   .results-table { font-size: 0.82rem; }
   .teaser-figure svg { min-width: 640px; }
 }
+
+/* Expanded preprint evaluation and responsive reading. */
+.validation-stat { color: #1d4ed8; font-weight: 700; font-size: 1.7rem; margin: .5rem 0; }
+.benchmark-note { color: #536174; font-size: .9rem; line-height: 1.6; margin-top: 1rem; }
+.results-table tbody th { font-weight: 400; vertical-align: middle; }
+.results-table .row-best th { background: #ecfdf5; }
+.results-table .rate { display: block; color: #64748b; font-size: .84em; white-space: nowrap; }
+.results-table td { vertical-align: middle; }
+.table-container { border: 1px solid #e5e7eb; border-radius: 8px; }
+.table-container .table { margin-bottom: 0; }
+.figure-card > a, .pareto-chart > a, .teaser-figure > a { display: block; }
+.navbar-burger { border: 0; background: transparent; color: #374151; }
+a:focus-visible, button:focus-visible { outline: 3px solid #2563eb; outline-offset: 3px; }
+@media (max-width: 1023px) { .navbar-menu.is-active { max-height: 75vh; overflow-y: auto; } }
+@media (max-width: 768px) {
+  html { font-size: 16px; }
+  .hero-body { padding: 2.5rem 1.25rem; }
+  .publication-title { font-size: 2rem !important; overflow-wrap: anywhere; }
+  .section { padding: 2.5rem 1.1rem; }
+  .content.has-text-justified { text-align: left !important; }
+  .results-table { min-width: 620px; }
+  .figure-card, .pareto-chart, .teaser-figure { padding: 10px; }
+  .news-date { display: block; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  section:target { animation: none; }
+  .phase-card, .navbar .navbar-item { transition: none; }
+}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="description"
@@ -12,8 +12,6 @@
         rel="stylesheet">
 
   <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
@@ -21,28 +19,26 @@
   <link rel="stylesheet" href="./static/css/aura.css">
   <link rel="icon" href="./static/images/favicon.svg">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
+  <script defer src="./static/js/index.js"></script>
 </head>
 <body>
 
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+    <button type="button" class="navbar-burger" aria-label="menu" aria-expanded="false" aria-controls="main-menu">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
-    </a>
+    </button>
   </div>
-  <div class="navbar-menu">
+  <div class="navbar-menu" id="main-menu">
     <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
       <a class="navbar-item" href="#abstract">Abstract</a>
       <a class="navbar-item" href="#method">Method</a>
       <a class="navbar-item" href="#benchmarks">Benchmarks</a>
       <a class="navbar-item" href="#results">Results</a>
+      <a class="navbar-item" href="#validation">Human Validation</a>
       <a class="navbar-item" href="#bibtex">BibTeX</a>
     </div>
   </div>
@@ -84,16 +80,16 @@
                 </a>
               </span>
               <span class="link-block">
-                <a href="https://arxiv.org/pdf/2605.30848v2"
+                <a href="./static/papers/aura-preprint.pdf"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
                   </span>
-                  <span>Paper</span>
+                  <span>Preprint</span>
                 </a>
               </span>
               <span class="link-block">
-                <a href="https://github.com/AaronLi43/AURA"
+                <a href="https://github.com/PEACH-Research-Lab/AURA"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
@@ -123,9 +119,9 @@
   <div class="container is-max-desktop">
     <div class="hero-body">
       <div class="teaser-figure">
-        <img src="./static/images/teaser.png"
+        <a href="./static/images/overview-53.png" target="_blank" rel="noopener"><img src="./static/images/overview-53.png"
              alt="AURA overview: adaptive privacy scope expansion, masking convergence, and reconstruct-evaluate-select stages."
-             class="teaser-img"/>
+             class="teaser-img"/></a>
       </div>
       <h2 class="subtitle has-text-centered">
         <strong>Figure 1.</strong> <span class="aura-title">AURA</span> overview. Adaptive privacy
@@ -147,7 +143,7 @@
       <li><span class="news-date">2026-06-01</span> Paper released on arXiv.</li>
       <li><span class="news-date">2026-05-28</span> Project website is live.</li>
       <li><span class="news-date">2026-05-26</span> Code released on
-        <a href="https://github.com/AaronLi43/AURA">GitHub</a>.</li>
+        <a href="https://github.com/PEACH-Research-Lab/AURA">GitHub</a>.</li>
     </ul>
   </div>
 </section>
@@ -176,10 +172,11 @@
             interview transcripts using re-identification attacks carried out by web-search agents,
             along with a utility evaluation based on interviewee-profile facts, codebook facts, and
             the joint contextual utility grid. Our results show that
-            <span class="aura-title">AURA</span> improves the privacy-utility frontier by using
-            adaptive privacy scope to strengthen resistance to agentic re-identification and using a
-            mask–reconstruct anonymization method to better preserve contextual utility under fixed
-            privacy scope.
+            adaptive-scope <span class="aura-title">AURA</span> yields the lowest agentic
+            re-identification counts under each of three attacker models among the non-DP methods,
+            and that at matched scope and backbone, <span class="aura-title">AURA</span>’s
+            mask–reconstruct design retains more contextual utility than the prior LLM anonymizer
+            (<strong>+6.4 percentage points in unit-grid recovery</strong>) at comparable privacy.
           </p>
         </div>
       </div>
@@ -264,8 +261,8 @@
               [2025] scope; useful for controlled comparisons.</li>
             <li><strong>Pure adaptive <span class="aura-title">AURA</span></strong> — directly infers
               identifiable attributes without the 8-attribute prior.</li>
-            <li><strong>Backbones</strong> — API-powered (GPT-5.1 + GPT-4.1) and fully on-device
-              (Qwen3.5-27B, Qwen3.5-35B-A3B).</li>
+            <li><strong>Backbones</strong> — Our experiments include GPT-4.1 and open-weight
+              models that can run locally: Qwen3.5-27B and Qwen3.5-35B-A3B.</li>
           </ul>
         </div>
       </div>
@@ -281,10 +278,10 @@
         <h2 class="title is-3">Benchmarks</h2>
         <div class="content has-text-justified">
           <p>
-            We curate <strong>27 re-identifiable interview transcripts</strong> from the
-            <em>Anthropic Interviewer</em> dataset, retained only after a verified web-search
-            attack succeeded on the original text. We then evaluate every defense along both
-            privacy and utility axes.
+            We evaluate on <strong>53 re-identifiable interview transcripts</strong> from the
+            <em>Anthropic Interviewer</em> dataset. We screen all 1,250 transcripts with an agentic
+            web-search attack and retain cases with verifiable identification evidence. Every
+            defense is evaluated on both privacy and utility.
           </p>
         </div>
       </div>
@@ -295,27 +292,34 @@
         <div class="benchmark-card">
           <h4 class="title is-5">Privacy · Agentic Re-Identification</h4>
           <p>
-            We re-run the same web-search agent attack on each rewritten transcript and report the
-            number of re-identified individuals out of 27 under three attackers:
+            Each attacker receives a fresh request containing only the attack prompt and rewritten
+            transcript, without Phase 0 traces. We report successful re-identification counts out of
+            53 under three attackers:
           </p>
           <ul>
-            <li>GPT-5.1 (web search, reasoning high)</li>
-            <li>GPT-5.4-mini (web search, reasoning high)</li>
-            <li>Gemini-3-Flash (web search, reasoning high)</li>
+            <li>GPT-5.1 (web search)</li>
+            <li>GPT-5.4-mini (web search)</li>
+            <li>Gemini-3-Flash (web search)</li>
           </ul>
+          <p class="benchmark-note">Adaptive Qwen privacy scopes are generated with
+            DeepSeek-V4-Flash and web search, holding out all three evaluation attackers from
+            scope generation.</p>
         </div>
       </div>
       <div class="column is-half">
         <div class="benchmark-card">
           <h4 class="title is-5">Utility · Three Levels</h4>
           <ul>
-            <li><strong>Interviewee-profile facts</strong> — 170 validated facts capturing
+            <li><strong>Interviewee-profile facts</strong> — 340 validated facts capturing
               respondent context (occupation, expertise, education, …).</li>
-            <li><strong>Codebook facts</strong> — 371 facts from a human-authored codebook with
+            <li><strong>Codebook facts</strong> — 732 facts from a human-authored codebook with
               13 codes across 5 categories.</li>
-            <li><strong>Utility grid (units)</strong> — 2,349 (profile × code) joint units; a
+            <li><strong>Utility grid (units)</strong> — 4,758 (profile × code) joint units; a
               unit is recovered only when <em>both</em> constituents are recoverable.</li>
           </ul>
+          <p class="benchmark-note">Recoverability is judged by <strong>DeepSeek-V4-Flash</strong>,
+            a different model family from the GPT-4.1 and Qwen rewriting backbones. Grid recovery
+            is weighted over all validated units.</p>
         </div>
       </div>
     </div>
@@ -347,19 +351,19 @@
         <div class="content has-text-justified">
           <p>
             Across three web-search attackers, <span class="aura-title">AURA</span>’s adaptive-scope
-            variants reduce agentic re-identification to <strong>0–5 / 27</strong> transcripts —
-            substantially below NER-based redaction (13–21 / 27) and the prior LLM anonymizer
-            (6–7 / 27) — while retaining <strong>74.9–80.3%</strong> of unit-level utility-grid
-            information.
+            variants yield the lowest non-DP re-identification counts under each attacker:
+            <strong>0–7 / 53</strong>, compared with 26–40 / 53 for Presidio and 10–12 / 53 for
+            the prior LLM anonymizer. Adaptive-privacy AURA retains
+            <strong>72.0–76.1%</strong> of unit-level utility-grid information.
           </p>
         </div>
       </div>
     </div>
 
-    <h3 class="title is-4 has-text-centered">Agentic Re-Identification (27 transcripts)</h3>
+    <h3 class="title is-4 has-text-centered">Agentic Re-Identification (53 transcripts)</h3>
     <p class="caption has-text-centered">
-      Re-identification count out of 27 under each attacker. Lower is better. Methods on or near
-      the Pareto frontier are <strong>bolded</strong>.
+      Re-identification count and rate under each attacker. Lower is better. The highlighted row
+      matches Table 1 of the preprint. No model refusal was observed.
     </p>
 
     <div class="table-container">
@@ -373,49 +377,52 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="row-group"><td colspan="4"><em>AURA variants</em></td></tr>
-          <tr class="row-best"><td><strong>AURA (adapt. privacy, Qwen3.5-27B)</strong></td><td class="has-text-centered">2 / 27</td><td class="has-text-centered">4 / 27</td><td class="has-text-centered"><strong>0 / 27</strong></td></tr>
-          <tr><td>AURA (adapt. privacy, Qwen3.5-35B-A3B)</td><td class="has-text-centered">2 / 27</td><td class="has-text-centered">5 / 27</td><td class="has-text-centered">2 / 27</td></tr>
-          <tr class="row-best"><td><strong>AURA (adapt. privacy, GPT-4.1)</strong></td><td class="has-text-centered"><strong>2 / 27</strong></td><td class="has-text-centered"><strong>3 / 27</strong></td><td class="has-text-centered"><strong>0 / 27</strong></td></tr>
-          <tr><td>AURA (pure adaptive, GPT-4.1)</td><td class="has-text-centered">2 / 27</td><td class="has-text-centered">3 / 27</td><td class="has-text-centered">2 / 27</td></tr>
-          <tr><td>AURA (8-attribute, GPT-4.1)</td><td class="has-text-centered">6 / 27</td><td class="has-text-centered">8 / 27</td><td class="has-text-centered">7 / 27</td></tr>
-          <tr><td>AURA (8-attribute, Qwen3.5-27B)</td><td class="has-text-centered">4 / 27</td><td class="has-text-centered">7 / 27</td><td class="has-text-centered">3 / 27</td></tr>
-          <tr><td>AURA (8-attribute, Qwen3.5-35B-A3B)</td><td class="has-text-centered">2 / 27</td><td class="has-text-centered">8 / 27</td><td class="has-text-centered">4 / 27</td></tr>
-          <tr class="row-group"><td colspan="4"><em>Non-DP baselines</em></td></tr>
-          <tr><td>Anonymizer [Staab+ 2025]</td><td class="has-text-centered">6 / 27</td><td class="has-text-centered">7 / 27</td><td class="has-text-centered">7 / 27</td></tr>
-          <tr class="row-bad"><td>Presidio</td><td class="has-text-centered">13 / 27</td><td class="has-text-centered">21 / 27</td><td class="has-text-centered">17 / 27</td></tr>
-          <tr><td>One-shot rewrite (minimal)</td><td class="has-text-centered">10 / 27</td><td class="has-text-centered">14 / 27</td><td class="has-text-centered">8 / 27</td></tr>
-          <tr class="row-bad"><td>One-shot rewrite (detailed)</td><td class="has-text-centered">15 / 27</td><td class="has-text-centered">17 / 27</td><td class="has-text-centered">14 / 27</td></tr>
-          <tr class="row-group"><td colspan="4"><em>DP-MLM baselines</em></td></tr>
-          <tr><td>DP-MLM (ε = 10)</td><td class="has-text-centered">0 / 27</td><td class="has-text-centered">0 / 27</td><td class="has-text-centered">0 / 27</td></tr>
-          <tr><td>DP-MLM (ε = 30)</td><td class="has-text-centered">0 / 27</td><td class="has-text-centered">0 / 27</td><td class="has-text-centered">0 / 27</td></tr>
-          <tr><td>DP-MLM (ε = 50)</td><td class="has-text-centered">4 / 27</td><td class="has-text-centered">4 / 27</td><td class="has-text-centered">1 / 27</td></tr>
-          <tr><td>DP-MLM (ε = 70)</td><td class="has-text-centered">3 / 27</td><td class="has-text-centered">3 / 27</td><td class="has-text-centered">1 / 27</td></tr>
-          <tr><td>DP-MLM (ε = 100)</td><td class="has-text-centered">4 / 27</td><td class="has-text-centered">5 / 27</td><td class="has-text-centered">2 / 27</td></tr>
-          <tr><td>DP-MLM (ε = 120)</td><td class="has-text-centered">4 / 27</td><td class="has-text-centered">4 / 27</td><td class="has-text-centered">4 / 27</td></tr>
-          <tr><td>DP-MLM (ε = 140)</td><td class="has-text-centered">4 / 27</td><td class="has-text-centered">4 / 27</td><td class="has-text-centered">4 / 27</td></tr>
+          <tr class="row-group"><td colspan="4">AURA variants</td></tr>
+          <tr class="row-best"><th scope="row"><strong>AURA (adapt. privacy, Qwen3.5-35B-A3B)</strong></th><td class="has-text-centered">2 / 53 <span class="rate">(3.8%)</span></td><td class="has-text-centered">7 / 53 <span class="rate">(13.2%)</span></td><td class="has-text-centered">2 / 53 <span class="rate">(3.8%)</span></td></tr>
+          <tr><th scope="row">AURA (adapt. privacy, Qwen3.5-27B)</th><td class="has-text-centered">4 / 53 <span class="rate">(7.5%)</span></td><td class="has-text-centered">7 / 53 <span class="rate">(13.2%)</span></td><td class="has-text-centered">0 / 53 <span class="rate">(0.0%)</span></td></tr>
+          <tr><th scope="row">AURA (adapt. privacy, GPT-4.1)</th><td class="has-text-centered">4 / 53 <span class="rate">(7.5%)</span></td><td class="has-text-centered">6 / 53 <span class="rate">(11.3%)</span></td><td class="has-text-centered">0 / 53 <span class="rate">(0.0%)</span></td></tr>
+          <tr><th scope="row">AURA (pure adaptive, GPT-4.1)</th><td class="has-text-centered">2 / 53 <span class="rate">(3.8%)</span></td><td class="has-text-centered">7 / 53 <span class="rate">(13.2%)</span></td><td class="has-text-centered">3 / 53 <span class="rate">(5.7%)</span></td></tr>
+          <tr><th scope="row">AURA (8-attribute, GPT-4.1)</th><td class="has-text-centered">8 / 53 <span class="rate">(15.1%)</span></td><td class="has-text-centered">14 / 53 <span class="rate">(26.4%)</span></td><td class="has-text-centered">10 / 53 <span class="rate">(18.9%)</span></td></tr>
+          <tr><th scope="row">AURA (8-attribute, Qwen3.5-27B)</th><td class="has-text-centered">5 / 53 <span class="rate">(9.4%)</span></td><td class="has-text-centered">9 / 53 <span class="rate">(17.0%)</span></td><td class="has-text-centered">4 / 53 <span class="rate">(7.5%)</span></td></tr>
+          <tr><th scope="row">AURA (8-attribute, Qwen3.5-35B-A3B)</th><td class="has-text-centered">3 / 53 <span class="rate">(5.7%)</span></td><td class="has-text-centered">12 / 53 <span class="rate">(22.6%)</span></td><td class="has-text-centered">5 / 53 <span class="rate">(9.4%)</span></td></tr>
+          <tr class="row-group"><td colspan="4">Non-DP baselines</td></tr>
+          <tr><th scope="row">Anonymizer [Staab+ 2025]</th><td class="has-text-centered">11 / 53 <span class="rate">(20.8%)</span></td><td class="has-text-centered">12 / 53 <span class="rate">(22.6%)</span></td><td class="has-text-centered">10 / 53 <span class="rate">(18.9%)</span></td></tr>
+          <tr><th scope="row">Presidio</th><td class="has-text-centered">26 / 53 <span class="rate">(49.1%)</span></td><td class="has-text-centered">40 / 53 <span class="rate">(75.5%)</span></td><td class="has-text-centered">27 / 53 <span class="rate">(50.9%)</span></td></tr>
+          <tr><th scope="row">One-shot rewrite (minimal)</th><td class="has-text-centered">12 / 53 <span class="rate">(22.6%)</span></td><td class="has-text-centered">18 / 53 <span class="rate">(34.0%)</span></td><td class="has-text-centered">11 / 53 <span class="rate">(20.8%)</span></td></tr>
+          <tr><th scope="row">One-shot rewrite (detailed)</th><td class="has-text-centered">24 / 53 <span class="rate">(45.3%)</span></td><td class="has-text-centered">33 / 53 <span class="rate">(62.3%)</span></td><td class="has-text-centered">23 / 53 <span class="rate">(43.4%)</span></td></tr>
+          <tr class="row-group"><td colspan="4">DP-MLM baselines</td></tr>
+          <tr><th scope="row">DP-MLM (ε = 10)</th><td class="has-text-centered">0 / 53 <span class="rate">(0.0%)</span></td><td class="has-text-centered">0 / 53 <span class="rate">(0.0%)</span></td><td class="has-text-centered">0 / 53 <span class="rate">(0.0%)</span></td></tr>
+          <tr><th scope="row">DP-MLM (ε = 30)</th><td class="has-text-centered">2 / 53 <span class="rate">(3.8%)</span></td><td class="has-text-centered">0 / 53 <span class="rate">(0.0%)</span></td><td class="has-text-centered">0 / 53 <span class="rate">(0.0%)</span></td></tr>
+          <tr><th scope="row">DP-MLM (ε = 50)</th><td class="has-text-centered">9 / 53 <span class="rate">(17.0%)</span></td><td class="has-text-centered">5 / 53 <span class="rate">(9.4%)</span></td><td class="has-text-centered">2 / 53 <span class="rate">(3.8%)</span></td></tr>
+          <tr><th scope="row">DP-MLM (ε = 70)</th><td class="has-text-centered">10 / 53 <span class="rate">(18.9%)</span></td><td class="has-text-centered">9 / 53 <span class="rate">(17.0%)</span></td><td class="has-text-centered">3 / 53 <span class="rate">(5.7%)</span></td></tr>
+          <tr><th scope="row">DP-MLM (ε = 100)</th><td class="has-text-centered">11 / 53 <span class="rate">(20.8%)</span></td><td class="has-text-centered">13 / 53 <span class="rate">(24.5%)</span></td><td class="has-text-centered">3 / 53 <span class="rate">(5.7%)</span></td></tr>
+          <tr><th scope="row">DP-MLM (ε = 120)</th><td class="has-text-centered">11 / 53 <span class="rate">(20.8%)</span></td><td class="has-text-centered">13 / 53 <span class="rate">(24.5%)</span></td><td class="has-text-centered">6 / 53 <span class="rate">(11.3%)</span></td></tr>
+          <tr><th scope="row">DP-MLM (ε = 140)</th><td class="has-text-centered">8 / 53 <span class="rate">(15.1%)</span></td><td class="has-text-centered">10 / 53 <span class="rate">(18.9%)</span></td><td class="has-text-centered">4 / 53 <span class="rate">(7.5%)</span></td></tr>
         </tbody>
       </table>
     </div>
 
+    <p class="caption has-text-centered">Counts are empirical outcomes, not guarantees of anonymity.
+      At 0 / 53, the exact 95% binomial interval is 0–6.7%.
+      <a href="./static/papers/aura-preprint.pdf#page=35">See Appendix I for all intervals.</a></p>
+
     <h3 class="title is-4 has-text-centered" style="margin-top:3rem;">Utility Preservation</h3>
 
     <div class="figure-card">
-      <img src="./static/images/utility_barplot.png"
+      <a href="./static/images/utility-53.png" target="_blank" rel="noopener"><img src="./static/images/utility-53.png"
            alt="Utility accuracy across profile, code, and validated grid units for AURA, non-DP baselines, and DP-MLM."
-           class="figure-img"/>
+           class="figure-img"/></a>
       <p class="caption has-text-centered">
-        <strong>Figure 2.</strong> Utility preservation across 27 transcripts. Profile and
-        codebook values are fact-level recoverability; Grid (unit) is the weighted recovery rate
-        over all 2,349 validated profile-code units. Dashed horizontal lines mark the adaptive
-        privacy <span class="aura-title">AURA</span> (Qwen3.5-27B) accuracy — the highest
-        contextual utility-grid accuracy — for the corresponding metric.
+        <strong>Utility preservation (preprint Figure 2, bottom).</strong> Results across
+        53 transcripts, with 340 profile facts, 732 codebook facts, and 4,758 utility-grid units.
+        Dashed lines mark adaptive-privacy <span class="aura-title">AURA</span>
+        (Qwen3.5-35B-A3B), which has the highest unit-grid recovery among AURA configurations.
       </p>
     </div>
 
     <p class="caption has-text-centered" style="margin-top:1.5rem;">
-      <strong>Utility-grid unit recovery (%)</strong> across 27 transcripts — the joint metric
-      over all 2,349 validated profile-code units. Higher is better.
+      <strong>Full utility recovery (%)</strong> from preprint Table 6. Grid (unit) is the
+      weighted recovery rate over all 4,758 validated profile-code units. Higher is better.
     </p>
 
     <div class="table-container">
@@ -423,26 +430,33 @@
         <thead>
           <tr>
             <th>Method</th>
-            <th class="has-text-centered">Utility grid (unit)</th>
+            <th class="has-text-centered">Profile</th>
+            <th class="has-text-centered">Codebook</th>
+            <th class="has-text-centered">Grid (unit)</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="row-group"><td colspan="2"><em>AURA variants</em></td></tr>
-          <tr class="row-best"><td><strong>AURA (adapt. privacy, Qwen3.5-27B)</strong></td><td class="has-text-centered"><strong>80.3</strong></td></tr>
-          <tr><td>AURA (adapt. privacy, Qwen3.5-35B-A3B)</td><td class="has-text-centered">76.7</td></tr>
-          <tr><td>AURA (adapt. privacy, GPT-4.1)</td><td class="has-text-centered">74.9</td></tr>
-          <tr><td>AURA (pure adaptive, GPT-4.1)</td><td class="has-text-centered">71.9</td></tr>
-          <tr><td>AURA (8-attribute, GPT-4.1)</td><td class="has-text-centered">77.1</td></tr>
-          <tr><td>AURA (8-attribute, Qwen3.5-27B)</td><td class="has-text-centered">78.7</td></tr>
-          <tr><td>AURA (8-attribute, Qwen3.5-35B-A3B)</td><td class="has-text-centered">80.2</td></tr>
-          <tr class="row-group"><td colspan="2"><em>Non-DP baselines</em></td></tr>
-          <tr><td>Anonymizer [Staab+ 2025]</td><td class="has-text-centered">72.1</td></tr>
-          <tr><td>Presidio</td><td class="has-text-centered">96.7</td></tr>
-          <tr><td>One-shot rewrite (minimal)</td><td class="has-text-centered">92.8</td></tr>
-          <tr><td>One-shot rewrite (detailed)</td><td class="has-text-centered">98.2</td></tr>
-          <tr class="row-group"><td colspan="2"><em>DP-MLM baselines</em></td></tr>
-          <tr class="row-bad"><td>DP-MLM (ε = 10)</td><td class="has-text-centered">0.0</td></tr>
-          <tr><td>DP-MLM (ε = 140)</td><td class="has-text-centered">60.1</td></tr>
+          <tr class="row-group"><td colspan="4">AURA variants</td></tr>
+          <tr class="row-best"><th scope="row"><strong>AURA (adapt. privacy, Qwen3.5-35B-A3B)</strong></th><td class="has-text-centered">75.0%</td><td class="has-text-centered">97.5%</td><td class="has-text-centered">76.1%</td></tr>
+          <tr><th scope="row">AURA (adapt. privacy, Qwen3.5-27B)</th><td class="has-text-centered">74.4%</td><td class="has-text-centered">97.8%</td><td class="has-text-centered">76.0%</td></tr>
+          <tr><th scope="row">AURA (adapt. privacy, GPT-4.1)</th><td class="has-text-centered">70.3%</td><td class="has-text-centered">96.4%</td><td class="has-text-centered">72.0%</td></tr>
+          <tr><th scope="row">AURA (pure adaptive, GPT-4.1)</th><td class="has-text-centered">69.7%</td><td class="has-text-centered">94.7%</td><td class="has-text-centered">69.4%</td></tr>
+          <tr><th scope="row">AURA (8-attribute, GPT-4.1)</th><td class="has-text-centered">75.3%</td><td class="has-text-centered">95.1%</td><td class="has-text-centered">72.7%</td></tr>
+          <tr><th scope="row">AURA (8-attribute, Qwen3.5-27B)</th><td class="has-text-centered">73.2%</td><td class="has-text-centered">97.4%</td><td class="has-text-centered">74.7%</td></tr>
+          <tr><th scope="row">AURA (8-attribute, Qwen3.5-35B-A3B)</th><td class="has-text-centered">71.5%</td><td class="has-text-centered">97.4%</td><td class="has-text-centered">72.9%</td></tr>
+          <tr class="row-group"><td colspan="4">Non-DP baselines</td></tr>
+          <tr><th scope="row">Anonymizer [Staab+ 2025]</th><td class="has-text-centered">67.4%</td><td class="has-text-centered">95.9%</td><td class="has-text-centered">66.3%</td></tr>
+          <tr><th scope="row">Presidio</th><td class="has-text-centered">97.9%</td><td class="has-text-centered">97.7%</td><td class="has-text-centered">95.6%</td></tr>
+          <tr><th scope="row">One-shot rewrite (minimal)</th><td class="has-text-centered">88.8%</td><td class="has-text-centered">97.7%</td><td class="has-text-centered">87.0%</td></tr>
+          <tr><th scope="row">One-shot rewrite (detailed)</th><td class="has-text-centered">97.6%</td><td class="has-text-centered">97.4%</td><td class="has-text-centered">96.5%</td></tr>
+          <tr class="row-group"><td colspan="4">DP-MLM baselines</td></tr>
+          <tr><th scope="row">DP-MLM (ε = 10)</th><td class="has-text-centered">0.0%</td><td class="has-text-centered">0.0%</td><td class="has-text-centered">0.0%</td></tr>
+          <tr><th scope="row">DP-MLM (ε = 30)</th><td class="has-text-centered">22.1%</td><td class="has-text-centered">47.1%</td><td class="has-text-centered">14.1%</td></tr>
+          <tr><th scope="row">DP-MLM (ε = 50)</th><td class="has-text-centered">72.1%</td><td class="has-text-centered">68.7%</td><td class="has-text-centered">51.2%</td></tr>
+          <tr><th scope="row">DP-MLM (ε = 70)</th><td class="has-text-centered">71.8%</td><td class="has-text-centered">74.7%</td><td class="has-text-centered">56.4%</td></tr>
+          <tr><th scope="row">DP-MLM (ε = 100)</th><td class="has-text-centered">74.1%</td><td class="has-text-centered">72.4%</td><td class="has-text-centered">55.2%</td></tr>
+          <tr><th scope="row">DP-MLM (ε = 120)</th><td class="has-text-centered">79.1%</td><td class="has-text-centered">73.8%</td><td class="has-text-centered">59.1%</td></tr>
+          <tr><th scope="row">DP-MLM (ε = 140)</th><td class="has-text-centered">77.1%</td><td class="has-text-centered">74.9%</td><td class="has-text-centered">59.3%</td></tr>
         </tbody>
       </table>
     </div>
@@ -452,37 +466,40 @@
       <div class="column is-four-fifths">
         <div class="content has-text-justified">
           <p>
-            Plotting privacy success (100 − re-identification rate, %) against unit utility-grid
-            recovery, <span class="aura-title">AURA</span>’s adaptive variants sit closest to the
-            upper-right corner across all three attackers. The 8-attribute
-            <span class="aura-title">AURA</span> variants cluster on the privacy axis at higher
-            utility than the prior anonymizer, while DP-MLM dominates the high-privacy /
-            low-utility region and one-shot rewriting + Presidio populate the high-utility /
-            high-leakage region.
+            At the same <strong>8-attribute scope and GPT-4.1 backbone</strong>, AURA retains
+            <strong>72.7%</strong> of utility-grid units, compared with <strong>66.3%</strong> for
+            the anonymizer. The paired difference is <strong>+6.4 percentage points</strong>
+            (nominal 95% CI: <strong>0.1 to 12.7</strong>), using a paired transcript-cluster
+            bootstrap with 100,000 resamples. Average re-identification counts across attackers
+            are 10.67 / 53 and 11 / 53, respectively. This comparison holds scope and backbone
+            fixed to examine the contribution of mask–reconstruct.
+          </p>
+          <p>
+            Adaptive-privacy AURA retains 72.0–76.1% unit-grid recovery with 0–7 / 53
+            re-identifications. DP-MLM trades utility for lower re-identification, while Presidio
+            and one-shot rewriting preserve more utility with higher re-identification.
+            <a href="./static/papers/aura-preprint.pdf#page=32">Table 7 reports the paired utility comparisons.</a>
           </p>
         </div>
       </div>
     </div>
 
     <div class="pareto-chart">
-      <img src="./static/images/pareto_front.png"
+      <a href="./static/images/pareto-53.png" target="_blank" rel="noopener"><img src="./static/images/pareto-53.png"
            alt="Pareto front for privacy success vs. utility-grid unit recovery under GPT-5.4-mini."
-           class="figure-img"/>
+           class="figure-img"/></a>
       <p class="caption has-text-centered">
-        <strong>Figure 3.</strong> Pareto front for privacy success versus unit utility-grid
-        recovery under GPT-5.4-mini, the stronger attacker in our setting. The plot highlights the
-        middle-ground behavior of adaptive <span class="aura-title">AURA</span> variants relative
-        to DP-MLM's low-utility privacy and the high-utility / high-leakage behavior of lighter
-        rewriting methods. The yellow band shows that the variants with fixed privacy scope of 8
-        attributes cluster on the privacy axis.
+        <strong>Privacy–utility trade-off (preprint Figure 2, top).</strong> Privacy success
+        (100 − re-identification rate) versus unit-grid recovery under GPT-5.4-mini, which has
+        the highest average re-identification rate in this evaluation. The frontier connects
+        observed operating points and does not establish statistical dominance.
       </p>
     </div>
 
     <h3 class="title is-4 has-text-centered" style="margin-top:3rem;">Qualitative Diff Example</h3>
     <p class="caption has-text-centered">
-      A representative turn-level excerpt. AURA replaces specific entities with category-level
-      terms while preserving first-person voice; the Anonymizer rewrites entire sentences,
-      damaging qualitative flow.
+      A synthetic illustration of how AURA generalizes specific details while preserving
+      surrounding context. These examples illustrate editing behavior and are not evaluation data.
     </p>
 
     <div class="diff-grid">
@@ -518,27 +535,73 @@
 </section>
 
 
-<section class="section section-light" id="discussion">
+<section class="section section-light" id="validation">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Human Validation</h2>
+    <p class="caption has-text-centered">Fact annotation checks and human judgments of rewrite quality,
+      reported in <a href="./static/papers/aura-preprint.pdf#page=35">Appendices J–K</a>.</p>
+    <div class="columns">
+      <div class="column is-one-third">
+        <div class="benchmark-card">
+          <h3 class="title is-5">Codebook annotations</h3>
+          <p class="validation-stat">91 / 105</p>
+          <p>Facts with matching labels from two independent expert annotators
+            (86.7% agreement; Gwet’s AC1 = 0.845).</p>
+          <p class="benchmark-note">This measures inter-expert agreement. It does not measure
+            expert–LLM agreement.</p>
+        </div>
+      </div>
+      <div class="column is-one-third">
+        <div class="benchmark-card">
+          <h3 class="title is-5">Profile annotations</h3>
+          <p class="validation-stat">68 / 71</p>
+          <p>Resolved crowd labels agree with the DeepSeek-audited reference
+            (95.8% agreement; Gwet’s AC1 = 0.948).</p>
+          <p class="benchmark-note">41 of 102 recruited participants were retained.
+            Of 75 facts, 71 had a resolved majority and four were tied.</p>
+        </div>
+      </div>
+      <div class="column is-one-third">
+        <div class="benchmark-card">
+          <h3 class="title is-5">Rewrite quality</h3>
+          <p class="validation-stat">86.9% faithful</p>
+          <p>106 of 122 retained rewrite pairs were judged to introduce no false information.</p>
+          <p class="benchmark-note">59 of 92 recruited participants were retained. Of 150 pairs,
+            28 with tied faithfulness votes were excluded. Results are pooled across the evaluated rewrites.</p>
+        </div>
+      </div>
+    </div>
+    <p class="caption has-text-centered">Among the same 122 retained pairs, 74 (60.7%) were judged
+      equally easy or easier to read than the original, 11 (9.0%) favored the original, and 37 (30.3%)
+      had tied readability votes. Equal readability and tied votes are distinct outcomes.</p>
+  </div>
+</section>
+
+
+<section class="section" id="discussion">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Why It Matters</h2>
         <div class="content has-text-justified">
           <p>
-            Agentic LLMs collapse the distance between casual contextual cues and Google-able
-            identity evidence. NER-based redaction breaks under stronger attacker models (13/27 →
-            21/27 re-identifications as we move from GPT-5.1 to GPT-5.4-mini); one-shot LLM
-            rewriting also fails to defend; formal DP can guarantee privacy but at heavy utility
-            cost. <span class="aura-title">AURA</span> shows that an LLM-guided mask–reconstruct
-            loop, paired with proactive web-search re-identification probing, lets practitioners
-            <em>tune</em> the privacy-utility trade-off — and our open-weight Qwen variants make
-            this practical to deploy locally.
+            The results are consistent with two distinct contributions: <strong>scope design</strong>
+            improves resistance to agentic re-identification, while <strong>mask–reconstruct</strong>
+            preserves contextual utility at comparable privacy. The masked spans also provide an
+            inspectable map of the details treated as privacy risks under the chosen scope.
           </p>
           <p>
-            We also frame anonymization as <strong>multi-stage risk management</strong> rather
-            than one-time redaction: inform participants of residual risk, monitor risky attribute
-            types, layer model-side safeguards, and evaluate releases against multiple attacker
-            models before deployment.
+            AURA provides empirical protection against the evaluated attackers, with no formal
+            differential-privacy or k-anonymity guarantee. The benchmark is a selected set of
+            53 vulnerable transcripts; fact recovery approximates qualitative utility and does not
+            directly measure end-to-end analyst performance. Zero observed re-identifications
+            does not establish zero risk against future attackers.
+          </p>
+          <p>
+            Responsible release remains a process of reviewing residual risks and evaluating
+            multiple attackers. We report aggregate results, withhold identifying evidence and
+            attack traces, and use synthetic examples to prevent localization. The study was
+            deemed exempt by our institutional review board under the Secondary &amp; Specimen Protocol category.
           </p>
         </div>
       </div>
@@ -550,11 +613,14 @@
 <section class="section" id="bibtex">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-<pre><code>@article{li2026aura,
-  title   = {LLM Anonymization Against Agentic Re-Identification},
-  author  = {Li, Ziwen and Wen, Jianing and Li, Tianshi},
-  journal = {arXiv preprint arXiv:2605.30848},
-  year    = {2026}
+<pre><code>@misc{li2026llmanonymizationagenticreidentification,
+      title={LLM Anonymization Against Agentic Re-Identification},
+      author={Ziwen Li and Jianing Wen and Tianshi Li},
+      year={2026},
+      eprint={2605.30848},
+      archivePrefix={arXiv},
+      primaryClass={cs.CR},
+      url={https://arxiv.org/abs/2605.30848},
 }</code></pre>
   </div>
 </section>
@@ -563,10 +629,10 @@
 <footer class="footer">
   <div class="container">
     <div class="content has-text-centered">
-      <a class="icon-link" href="https://arxiv.org/pdf/2605.30848v2" aria-label="PDF">
+      <a class="icon-link" href="./static/papers/aura-preprint.pdf" aria-label="PDF">
         <i class="fas fa-file-pdf"></i>
       </a>
-      <a class="icon-link" href="https://github.com/AaronLi43/AURA" aria-label="GitHub">
+      <a class="icon-link" href="https://github.com/PEACH-Research-Lab/AURA" aria-label="GitHub">
         <i class="fab fa-github"></i>
       </a>
     </div>
